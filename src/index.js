@@ -3,28 +3,29 @@ import ReactDOM from "react-dom";
 import "./index.css";
 
 // sqaure component
-class Square extends React.Component {
-  // add a constructor function
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     value: null,
-  //   };
-  // }
-  render() {
-    const addSquareHandler = (event) => {
-      return this.props.onClick();
-      // event.preventDefault();
-      // console.log("You clicked a button on the board");
-    };
+// class Square extends React.Component {
+//   render() {
+//     const addSquareHandler = (event) => {
+//       return this.props.onClick();
+//       // event.preventDefault();
+//       // console.log("You clicked a button on the board");
+//     };
 
-    return (
-      <button className="square" onClick={addSquareHandler}>
-        {this.props.value}
-      </button>
-    );
-  }
-}
+//     return (
+//       <button className="square" onClick={addSquareHandler}>
+//         {this.props.value}
+//       </button>
+//     );
+//   }
+// }
+
+const Square = (props) => {
+  return (
+    <button className="square" onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
+};
 
 // Board component
 class Board extends React.Component {
