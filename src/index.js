@@ -13,14 +13,14 @@ class Square extends React.Component {
   }
   render() {
     const addSquareHandler = (event) => {
-      this.setState({ value: "X" });
-      event.preventDefault();
-      console.log("You clicked a button on the board");
+      return this.props.onClick();
+      // event.preventDefault();
+      // console.log("You clicked a button on the board");
     };
 
     return (
       <button className="square" onClick={addSquareHandler}>
-        {this.state.value}
+        {this.props.value}
       </button>
     );
   }
