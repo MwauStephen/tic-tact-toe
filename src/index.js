@@ -5,12 +5,12 @@ import "./index.css";
 // sqaure component
 class Square extends React.Component {
   // add a constructor function
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: null,
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     value: null,
+  //   };
+  // }
   render() {
     const addSquareHandler = (event) => {
       return this.props.onClick();
