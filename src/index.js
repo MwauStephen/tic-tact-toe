@@ -5,7 +5,15 @@ import "./index.css";
 // sqaure component
 class Square extends React.Component {
   render() {
-    return <button className="square">{this.props.value}</button>;
+    const addSquareHandler = (event) => {
+      event.preventDefault();
+      console.log("You clicked a button on the board");
+    };
+    return (
+      <button className="square" onClick={addSquareHandler}>
+        {this.props.value}
+      </button>
+    );
   }
 }
 
