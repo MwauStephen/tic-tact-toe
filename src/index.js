@@ -13,11 +13,11 @@ class Square extends React.Component {
 
   render() {
     const addSquareHandler = () => {
-      console.log("You clicked me ");
+      this.setState({ value: "X" });
     };
     return (
       <button className="square" onClick={addSquareHandler}>
-        {this.props.value}
+        {this.state.value}
       </button>
     );
   }
