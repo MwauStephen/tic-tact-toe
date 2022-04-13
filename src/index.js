@@ -4,11 +4,19 @@ import "./index.css";
 
 // sqaure component
 class Square extends React.Component {
+  // add a constructor function
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: null,
+    };
+  }
   render() {
     const addSquareHandler = (event) => {
       event.preventDefault();
       console.log("You clicked a button on the board");
     };
+
     return (
       <button className="square" onClick={addSquareHandler}>
         {this.props.value}
