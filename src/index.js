@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 
 class Square extends React.Component {
+  // calling state
   constructor(props) {
     super(props);
 
@@ -24,6 +25,15 @@ class Square extends React.Component {
 }
 
 class Board extends React.Component {
+  // add state to board to enable lifting state up
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      Squares: Array(9).fill(null),
+    };
+  }
+
   renderSquare(i) {
     return <Square value={i} />;
   }
