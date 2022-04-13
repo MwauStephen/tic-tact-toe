@@ -4,7 +4,14 @@ import "./index.css";
 
 class Square extends React.Component {
   render() {
-    return <button className="square">{this.props.value}</button>;
+    const addSquareHandler = () => {
+      console.log("You clicked me ");
+    };
+    return (
+      <button className="square" onClick={addSquareHandler}>
+        {this.props.value}
+      </button>
+    );
   }
 }
 
