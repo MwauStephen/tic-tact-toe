@@ -2,27 +2,35 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
-class Square extends React.Component {
-  // calling state
-  // constructor(props) {
-  //   super(props);
+// class Square extends React.Component {
+//   // calling state
+//   // constructor(props) {
+//   //   super(props);
 
-  //   this.state = {
-  //     value: null,
-  //   };
-  // }
+//   //   this.state = {
+//   //     value: null,
+//   //   };
+//   // }
 
-  render() {
-    const addSquareHandler = () => {
-      return this.props.onClick();
-    };
-    return (
-      <button className="square" onClick={addSquareHandler}>
-        {this.props.value}
-      </button>
-    );
-  }
-}
+//   render() {
+//     const addSquareHandler = () => {
+//       return this.props.onClick();
+//     };
+//     return (
+//       <button className="square" onClick={addSquareHandler}>
+//         {this.props.value}
+//       </button>
+//     );
+//   }
+// }
+
+const Square = (props) => {
+  return (
+    <button className="square" onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
+};
 
 class Board extends React.Component {
   // add state to board to enable lifting state up
@@ -37,13 +45,13 @@ class Board extends React.Component {
   handleClick(i) {
     const squares = this.state.squares.slice();
     squares[i] = "X";
-    this.setState({squares:squares})
+    this.setState({ squares: squares });
   }
 
   renderSquare(i) {
     return (
       <Square
-        value={this.state.Squares[i]}
+        value={this.state.squares[i]}
         onClick={() => this.handleClick(i)}
       />
     );
