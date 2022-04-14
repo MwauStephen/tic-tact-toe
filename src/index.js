@@ -105,18 +105,27 @@ class Board extends React.Component {
 }
 
 class Game extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      history: [
-        {
-          squares: Array(9).fill(null),
-        },
-      ],
-      stepNumber: 0,
-      xIsNext: true,
-    };
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     history: [
+  //       {
+  //         squares: Array(9).fill(null),
+  //       },
+  //     ],
+  //     stepNumber: 0,
+  //     xIsNext: true,
+  //   };
+  // }
+
+  // added the jumpto function
+  jumpTo(step) {
+    this.setState({
+      stepNumber: step,
+      xIsNext: step % 2 === 0,
+    });
   }
+
   render() {
     const history = this.state.history;
     const current = history[history.length - 1];
