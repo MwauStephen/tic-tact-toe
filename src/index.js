@@ -35,13 +35,13 @@ const Square = (props) => {
 class Board extends React.Component {
   // add state to board to enable lifting state up
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      squares: Array(9).fill(null),
-      xIsNext: true,
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     squares: Array(9).fill(null),
+  //     xIsNext: true,
+  //   };
+  // }
 
   handleClick(i) {
     const squares = this.state.squares.slice();
