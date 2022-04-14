@@ -14,7 +14,7 @@ class Square extends React.Component {
 
   render() {
     const addSquareHandler = () => {
-      this.props.onClick();
+      return this.props.onClick();
     };
     return (
       <button className="square" onClick={addSquareHandler}>
@@ -30,8 +30,14 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      Squares: Array(9).fill(null),
+      squares: Array(9).fill(null),
     };
+  }
+
+  handleClick(i) {
+    const squares = this.state.squares.slice();
+    squares[i] = "X";
+    this.setState({squares:squares})
   }
 
   renderSquare(i) {
