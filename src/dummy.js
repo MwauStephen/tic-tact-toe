@@ -2,20 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
+// sqaure component
 // class Square extends React.Component {
-//   // calling state
-//   // constructor(props) {
-//   //   super(props);
-
-//   //   this.state = {
-//   //     value: null,
-//   //   };
-//   // }
-
 //   render() {
-//     const addSquareHandler = () => {
+//     const addSquareHandler = (event) => {
 //       return this.props.onClick();
+//       // event.preventDefault();
+//       // console.log("You clicked a button on the board");
 //     };
+
 //     return (
 //       <button className="square" onClick={addSquareHandler}>
 //         {this.props.value}
@@ -32,35 +27,42 @@ const Square = (props) => {
   );
 };
 
+// Board component
 class Board extends React.Component {
-  // add state to board to enable lifting state up
-
   // constructor(props) {
   //   super(props);
   //   this.state = {
   //     squares: Array(9).fill(null),
-  //     xIsNext: true,
+  //     xIsnext: true,
   //   };
   // }
 
-  // handleClick(i) {
-  //   const history = this.state.history;
-  //   const current = history[history.length - 1];
+  handleClick(i) {
+    const history = this.state.history.slice(0, this.state.stepNumber + 1);
+    const current = history[history.length - 1];
+    const squares = current.squares.slice();
 
-  //   const squares = this.state.squares.slice();
-  //   if (calculateWinner(squares) || squares[i]) {
-  //     return;
-  //   }
-  //   squares[i] = this.state.xIsNext ? "X" : "O";
-  //   this.setState({
-  //     history: history.concat([
-  //       {
-  //         squares: squares,
-  //       },
-  //     ]),
-  //     xIsNext: !this.state.xIsNext,
-  //   });
-  // }
+    if (calculateWinner(squares) || squares[i]) {
+      return;
+    }
+    squares[i] = this.state.xIsnext ? "X " : "0";
+    this.setState({
+      history: history.concat([
+        {
+          squares: squares,
+        },
+      ]),
+      stepNumber: history.length,
+      xIsNext: !this.state.xIsNext,
+    });
+  }
+
+  jumpTo(step) {
+    this.setState({
+      stepNumber: step,
+      xIsNext: step % 2 === 0,
+    });
+  }
 
   renderSquare(i) {
     return (
@@ -79,11 +81,10 @@ class Board extends React.Component {
     // } else {
     //   status = "Next player: " + (this.state.xIsNext ? "X" : "O");
     // }
-    // const status = "Next player:" + (this.state.xIsNext ? "X" : "O");
+    // // const status = "Next player:" + (this.state.xIsnext ? "x " : "0");
 
     return (
       <div>
-        {/* <div className="status">{status}</div> */}
         <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
@@ -104,23 +105,24 @@ class Board extends React.Component {
   }
 }
 
-class Game extends React.Component {
-  history = [
-    // Before first move
-    {
-      squares: [null, null, null, null, null, null, null, null, null],
-    },
-    // After first move
-    {
-      squares: [null, null, null, null, "X", null, null, null, null],
-    },
-    // After second move
-    {
-      squares: [null, null, null, null, "X", null, null, null, "O"],
-    },
-    // ...
-  ];
+// history = [
+//   // Before first move
+//   {
+//     squares: [null, null, null, null, null, null, null, null, null],
+//   },
+//   // After first move
+//   {
+//     squares: [null, null, null, null, "X", null, null, null, null],
+//   },
+//   // After second move
+//   {
+//     squares: [null, null, null, null, "X", null, null, null, "O"],
+//   },
+//   // ...
+// ];
 
+// Game component
+class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -133,40 +135,10 @@ class Game extends React.Component {
       xIsNext: true,
     };
   }
-
-  handleClick(i) {
-    const history = this.state.history.slice(0, this.state.stepNumber + 1);
-    const current = history[history.length - 1];
-    const squares = current.squares.slice();
-    if (calculateWinner(squares) || squares[i]) {
-      return;
-    }
-    squares[i] = this.state.xIsNext ? "X" : "O";
-    this.setState({
-      history: history.concat([
-        {
-          squares: squares,
-        },
-      ]),
-      stepNumber: history.length,
-      xIsNext: !this.state.xIsNext,
-    });
-  }
-
-  // added the jumpto function
-  jumpTo(step) {
-    this.setState({
-      stepNumber: step,
-      xIsNext: step % 2 === 0,
-    });
-  }
-
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
-
-    // Let’s map over the history in the Game’s render method:
     const moves = history.map((step, move) => {
       const desc = move ? "Go to move #" + move : "Go to game start";
       return (
@@ -175,14 +147,12 @@ class Game extends React.Component {
         </li>
       );
     });
-
     let status;
     if (winner) {
       status = "Winner: " + winner;
     } else {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
     }
-
     return (
       <div className="game">
         <div className="game-board">
@@ -199,7 +169,6 @@ class Game extends React.Component {
     );
   }
 }
-//
 
 function calculateWinner(squares) {
   const lines = [
@@ -221,10 +190,5 @@ function calculateWinner(squares) {
   return null;
 }
 
-// ========================================
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
 root.render(<Game />);
-
-// ReactDOM.render(<Game />, document.getElementById("root"));
